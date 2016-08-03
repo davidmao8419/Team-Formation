@@ -18,6 +18,7 @@ export class WaitComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
   waiting_page:FirebaseListObservable<any>;
   chatRoom:FirebaseListObservable<any>;
   public sub;
+  public a;
   public id:string;
   public users_number:number=0;
   //@Input() users_number:number;
@@ -36,6 +37,7 @@ export class WaitComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
     this.waiting_page=af.database.list('/page_waiting');
     this.chatRoom=af.database.list('/chatRoomAssign');
     Observable.interval(1000).map((x)=>x+1).subscribe((x)=>{this.time=x;}) //count the time (sec)
+
   }
    /* Handle checking offline if closing the browser or not */
   @HostListener('window:beforeunload',['$event'])
@@ -95,7 +97,8 @@ export class WaitComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
       //console.log("in the welcome page this.id=")
       //console.log(this.id);
     })
-    this.users.push({TurkID:this.id});
+
+    this.users.push({TurkID:this.id,room:0});
 
     this.users_num.subscribe(snapshot=>{
       //console.log("in the ngOnInit snapshot")
@@ -189,6 +192,8 @@ export class WaitComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
       let t=this.time+' sec';
       //console.log("t:")
       //console.log(t);
+      this.assignUsers();
+
       this.waiting_page.push({TurkID:this.id,time:t});
       //console.log("in the success")
       //console.log(this.time)
@@ -229,6 +234,28 @@ export class WaitComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
             tag=1;
            // this.sub.unsubscribe();
           }
+        })
+  }
+
+  assignUsers(){
+    let tag=1;
+    let key:string;
+    this.a=this.users.subscribe(snapshots=>{
+          //console.log("snapshots")
+          //console.log(snapshots)
+          snapshots.forEach(snapshot=>{
+            console.log("in the for each tag")
+            //console.log(tag)
+            //key=snapshot.val().TurkID;
+            console.log(snapshot.val().TurkID)
+            //this.sub.unsubscribe();
+            //this.chatRoom.push({TurkID:snapshot.val().TurkID,assignNumber:tag});
+
+          })
+          this.a.unsubscribe();
+          //console.log(tag)
+          //console.log(key)
+          //tag=tag+1;
         })
   }
 
