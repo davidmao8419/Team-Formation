@@ -1,0 +1,22 @@
+<!--
+<p>
+  formone works!
+</p>
+-->
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2 text">
+        <h1 style="color:#C40B0F;"><strong style="color:#150F54;">Form</strong> One</h1>
+        <h3>Please enter your answer.
+           <br>After submitting, you will be redirected to a chat page.
+           <!--
+           <br>You can type whatever you like in the chat page in <strong style="color:#C40B0F;">30</strong> seconds.<br> Then you'll be redirected to another page. 
+            -->
+           <br><br>1+1=<input type="text" #ans style="width:100px;">
+           <button (click)="submit(ans.value)">Submit</button>
+           </h3>
+    </div>
+</div>
+<!--
+1+1=<input type="text" #ans>
+<button (click)="submit(ans.value)">Submit</button>
+-->
