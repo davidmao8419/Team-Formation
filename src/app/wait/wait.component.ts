@@ -18,6 +18,7 @@ users_num: FirebaseObjectObservable<any>;
   waiting_page:FirebaseListObservable<any>; 
   chatRoom:FirebaseListObservable<any>;
   public sub;
+  public a;
   public id:string;
   public users_number:number=0;
   //@Input() users_number:number;
@@ -27,6 +28,7 @@ users_num: FirebaseObjectObservable<any>;
   public child_num:number=0;
   public time:number=0;
   public x:number;
+public test;
   
   constructor(private _route:ActivatedRoute, private _router:Router, public af:AngularFire) {
     this.users_num = af.database.object('/users_num',{preserveSnapshot:true});
@@ -35,6 +37,9 @@ users_num: FirebaseObjectObservable<any>;
     this.dropout = af.database.list('/dropout',{preserveSnapshot:true});
     this.waiting_page=af.database.list('/page_waiting');
     this.chatRoom=af.database.list('/chatRoomAssign');
+    //this.test=af.database.list('/onlineUsers',{query:{orderByChild: 'room',
+    //equalTo:0, 
+  //limitToLast:2}} );
     Observable.interval(1000).map((x)=>x+1).subscribe((x)=>{this.time=x;}) //count the time (sec) 
   }
    /* Handle checking offline if closing the browser or not */ 
@@ -95,7 +100,7 @@ users_num: FirebaseObjectObservable<any>;
       //console.log("in the welcome page this.id=")
       //console.log(this.id);
     })
-    this.users.push({TurkID:this.id});
+    this.users.push({TurkID:this.id,room:0});
     
     this.users_num.subscribe(snapshot=>{
       //console.log("in the ngOnInit snapshot")
@@ -189,6 +194,8 @@ users_num: FirebaseObjectObservable<any>;
       let t=this.time+' sec';
       //console.log("t:")
       //console.log(t);
+      this.assignUsers();
+      
       this.waiting_page.push({TurkID:this.id,time:t});
       //console.log("in the success")
       //console.log(this.time)
@@ -232,4 +239,27 @@ users_num: FirebaseObjectObservable<any>;
         })
   }
 
+  assignUsers(){
+    let tag=1;
+    let key:string;
+    this.a=this.users.subscribe(snapshots=>{
+          //console.log("snapshots")
+          //console.log(snapshots)
+          snapshots.forEach(snapshot=>{
+            console.log("in the for each tag")
+            //console.log(tag)
+            //key=snapshot.val().TurkID;
+            console.log(snapshot.val().TurkID)
+            //this.sub.unsubscribe();
+            //this.chatRoom.push({TurkID:snapshot.val().TurkID,assignNumber:tag});
+            
+          })
+          this.a.unsubscribe();
+          //console.log(tag)
+          //console.log(key)
+          //tag=tag+1;        
+        })
+  }
+
 }
+  
