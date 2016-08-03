@@ -10,12 +10,12 @@ import { Observable} from 'rxjs/Rx';
   templateUrl: 'wait.component.html',
   styleUrls: ['wait.component.css']
 })
-export class WaitComponent implements OnInit, OnChanges,AfterViewInit,OnDestroy {
-users_num: FirebaseObjectObservable<any>;
-  users:FirebaseListObservable<any>;
+export class WaitComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+  users_num: FirebaseObjectObservable<any>;
+  users: FirebaseListObservable<any>;
   testing:FirebaseObjectObservable<any>;
   dropout:FirebaseListObservable<any>;//record how many close the browser
-  waiting_page:FirebaseListObservable<any>; 
+  waiting_page:FirebaseListObservable<any>;
   chatRoom:FirebaseListObservable<any>;
   public sub;
   public id:string;
@@ -27,17 +27,17 @@ users_num: FirebaseObjectObservable<any>;
   public child_num:number=0;
   public time:number=0;
   public x:number;
-  
+
   constructor(private _route:ActivatedRoute, private _router:Router, public af:AngularFire) {
     this.users_num = af.database.object('/users_num',{preserveSnapshot:true});
     this.users= af.database.list('/onlineUsers',{preserveSnapshot:true});
-    this.testing = af.database.object('/testing'); 
+    this.testing = af.database.object('/testing');
     this.dropout = af.database.list('/dropout',{preserveSnapshot:true});
     this.waiting_page=af.database.list('/page_waiting');
     this.chatRoom=af.database.list('/chatRoomAssign');
-    Observable.interval(1000).map((x)=>x+1).subscribe((x)=>{this.time=x;}) //count the time (sec) 
+    Observable.interval(1000).map((x)=>x+1).subscribe((x)=>{this.time=x;}) //count the time (sec)
   }
-   /* Handle checking offline if closing the browser or not */ 
+   /* Handle checking offline if closing the browser or not */
   @HostListener('window:beforeunload',['$event'])
   beforeUnloadHandler(event){
       //this.testing.set({test:'BBBBBBBBBB'});
@@ -51,13 +51,13 @@ users_num: FirebaseObjectObservable<any>;
       this.dropout.push({TurkID:this.id,page:2});
       this.remove_list();
   }
-  
+
   @HostListener('window:reload',['$event'])
   reloadHandler(event){
     //console.log("in the window reload function")
     this.testing.set({test:'BBBBBBBBB'})
   }
-  
+
   //@HostListener('window:renavigate')
   ngAfterViewInit(){
     /*this.form.control.valueChanges.subscribe(
@@ -73,7 +73,7 @@ users_num: FirebaseObjectObservable<any>;
       this.users_number=snapshot.val().users_num
       //console.log(snapshot.val().users_num)
       //console.log(this.users_number)
-     
+
       if(this.users_number>=4){
         //console.log("in welcome you got two people!!!")
      //   this.page2.push({account:this.id,time:this.time});
@@ -82,7 +82,7 @@ users_num: FirebaseObjectObservable<any>;
      // this.users_left=15-this.users_number;
       //console.log("users_number")
       //console.log(this.users_number)
-      
+
     })
   }
   ngOnInit() {
@@ -96,34 +96,34 @@ users_num: FirebaseObjectObservable<any>;
       //console.log(this.id);
     })
     this.users.push({TurkID:this.id});
-    
+
     this.users_num.subscribe(snapshot=>{
       //console.log("in the ngOnInit snapshot")
       this.users_number=snapshot.val().users_num
       //console.log(snapshot.val().users_num)
       //console.log(this.users_number)
       this.users_left=4-this.users_number;
-      
-    
-      
-      
+
+
+
+
       //console.log("this.users.every.length")
       //console.log(this.users.every.length)
       //console.log("users_number")
       //console.log(this.users_number)
     })
-    
-    
 
-    /*Count the number of child in the list*/ 
+
+
+    /*Count the number of child in the list*/
       //console.log("this.users.for each")
       this.users.forEach(element => {
         //console.log(element)
         //console.log(element.length)
         this.child_num=element.length;
-         this.users_num.update({users_num:this.child_num});//@@@@@@@@@@@@@@@@  
+         this.users_num.update({users_num:this.child_num});//@@@@@@@@@@@@@@@@
     });
-     
+
       /*
       let chatRoomNum=Math.ceil(this.users_number/2);
       this.chatRoom.push({TurkID:this.id, roomNum:chatRoomNum});//assign users into different chat rooms
@@ -141,17 +141,17 @@ users_num: FirebaseObjectObservable<any>;
         Observable.interval(1000).map((x)=>x+1).subscribe((x)=>{this.time=x;})
         //console.log("in the reload")
         //console.log(this._router.url)
-        
-        
+
+
     }
-    
+
         //this._router.navigateByUrl(this._router.url);
      // location.reload();
      //  let link=['/welcome/'+this.id];
      //   this._router.navigate(link);
      //   console.log("in the reload")
 
-      
+
   }
 
   ngOnDestroy(){
@@ -166,16 +166,16 @@ users_num: FirebaseObjectObservable<any>;
     //})
 
       this.remove_list();
-        
+
     }
     //console.log("in the ngOnDestroy")
   }
-  
+
   ngOnChanges(changes){
     //console.log("in the ngOnChenges")
   }
 
-  
+
 /*
   renavigate(){
     let params: Object={};
@@ -183,7 +183,7 @@ users_num: FirebaseObjectObservable<any>;
   }
 */
   success(){
-   
+
     //if(this.users_number>=2){
       //Observable.interval(1000).map((x)=>x+1).subscribe((x)=>{this.time=x;})
       let t=this.time+' sec';
@@ -193,7 +193,7 @@ users_num: FirebaseObjectObservable<any>;
       //console.log("in the success")
       //console.log(this.time)
     //}
-    
+
     let link=['/formone/'+ this.id];
     this._router.navigate(link);
   }

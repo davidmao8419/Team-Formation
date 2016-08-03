@@ -10,6 +10,7 @@ import {WaitComponent} from './app/wait';
 import {FormoneComponent} from './app/formone';
 import {FormtwoComponent} from './app/formtwo';
 import {SuccessComponent} from './app/success';
+
 export const AppRoutes: Route[]=[
     { path:'', component: AppComponent},
     { path:'login', component:LoginComponent},
@@ -26,7 +27,7 @@ if (environment.production) {
 
 bootstrap(AppComponent,[
   FIREBASE_PROVIDERS,
-  // Initialize Firebase app  
+  // Initialize Firebase app
   defaultFirebase({
     apiKey: "AIzaSyCdFW2Uclc2AqA69PkMhLq6IIuuRn3CkwY",
     authDomain: "chat-5ed4b.firebaseapp.com",
