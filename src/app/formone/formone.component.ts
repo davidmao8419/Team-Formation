@@ -18,9 +18,15 @@ export class FormoneComponent implements OnInit {
   }
 
   ngOnInit() {
+    alert("Thanks for waiting!!! Can start the experiment now:)")
     this.sub=this._route.params.subscribe(params => {
       this.id=params['id'];
     })
+    this.chatroom.forEach(element => {
+        
+        this.roomUsers=element.length;
+        
+    });
   }
 
   submit(ans:number){
