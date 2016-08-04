@@ -1,3 +1,22 @@
+<!--
 <p>
   chat-two works!
 </p>
+-->
+<header>
+  <h3><strong style="color:#C40B0F;">ChatRoom2 Type Something and go to Next Page</strong> Timer:{{time}}</h3>
+
+  <input type="text" #limit (change)="changeLimit(limit.value)">
+  <button (click)="nextPage()" style="color:black;">Next Page</button>
+</header>
+
+<div class="chat-container">
+  
+  <flexchat-message
+    *ngFor="let message of messages | async"
+    [message]="message">
+  </flexchat-message>
+  
+</div>
+
+<input-bar (sent)="addMessage($event)"></input-bar>
