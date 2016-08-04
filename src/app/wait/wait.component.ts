@@ -192,7 +192,9 @@ export class WaitComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
       let t=this.time+' sec';
       //console.log("t:")
       //console.log(t);
-      this.assignUsers();
+
+      this.assignUsers2();
+      
 
       this.waiting_page.push({TurkID:this.id,time:t});
       //console.log("in the success")
@@ -237,25 +239,93 @@ export class WaitComponent implements OnInit, OnChanges, AfterViewInit, OnDestro
         })
   }
 
+  assignUsers2(){
+    let check:number=1;
+    let rnum=1;
+    let assignNum:number;
+    let tag:number=0;
+    this.users.forEach(element => {
+      //console.log(element)
+      //console.log(check)
+      if(check==5 && tag==0){
+        console.log("in the if ")
+        
+        element.forEach(user=>{
+          console.log("rnum")
+          console.log(rnum)
+          console.log(user.val().TurkID)
+          assignNum=Math.ceil(rnum/2);
+          console.log(assignNum)
+          console.log("***************************")
+          if(user.val().TurkID==this.id){
+            this.chatRoom.push({TurkID:user.val().TurkID, roomNum:assignNum});//assign users into different chat rooms
+          }
+          rnum++;
+          tag=1;
+        })
+        
+      }
+      check++;
+      
+      /*element.forEach(user=>{
+        console.log(user)
+      })*/
+    });
+  }
+  assignUsers2(){
+    let check:number=1;
+    let rnum=1;
+    let assignNum:number;
+    let tag:number=0;
+    this.users.forEach(element => {
+      //console.log(element)
+      //console.log(check)
+      if(check==5 && tag==0){
+        console.log("in the if ")
+        
+        element.forEach(user=>{
+          console.log("rnum")
+          console.log(rnum)
+          console.log(user.val().TurkID)
+          assignNum=Math.ceil(rnum/2);
+          console.log(assignNum)
+          console.log("***************************")
+          if(user.val().TurkID==this.id){
+            this.chatRoom.push({TurkID:user.val().TurkID, roomNum:assignNum});//assign users into different chat rooms
+          }
+          rnum++;
+          tag=1;
+        })
+        
+      }
+      check++;
+      
+      /*element.forEach(user=>{
+        console.log(user)
+      })*/
+    });
+  }
   assignUsers(){
-    let tag=1;
+   let tag=1;
     let key:string;
     this.a=this.users.subscribe(snapshots=>{
-          //console.log("snapshots")
+          console.log("snapshots")
           //console.log(snapshots)
+          /*
           snapshots.forEach(snapshot=>{
-            console.log("in the for each tag")
-            //console.log(tag)
-            //key=snapshot.val().TurkID;
-            console.log(snapshot.val().TurkID)
-            //this.sub.unsubscribe();
-            //this.chatRoom.push({TurkID:snapshot.val().TurkID,assignNumber:tag});
-
+            if(snapshot.val().room==0){
+              console.log("n the if")
+              console.log(snapshot.val().TurkID)
+              snapshot.val().room=1;
+            }
+         
+            
           })
-          this.a.unsubscribe();
+          */
+          //this.a.unsubscribe();
           //console.log(tag)
           //console.log(key)
-          //tag=tag+1;
+          //tag=tag+1;        
         })
   }
 
