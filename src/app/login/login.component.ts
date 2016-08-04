@@ -2,15 +2,23 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2';
 import { Router } from '@angular/router';
 import { Observable} from 'rxjs/Rx';
-
+import { DatePipe } from'@angular/common';
+mport {CORE_DIRECTIVES} from '@angular/common';
+import {FORM_DIRECTIVES} from '@angular/forms';
+import {BUTTON_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
+import {MD_INPUT_DIRECTIVES} from '@angular2-material/input';
 @Component({
   moduleId: module.id,
   selector: 'app-login',
   templateUrl: 'login.component.html',
-  styleUrls: ['login.component.css']
+  styleUrls: ['login.component.css'],
+  directives: [BUTTON_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES,MD_INPUT_DIRECTIVES]
 })
 
 export class LoginComponent implements OnInit {
+  public singleModel:string = '1';
+  public radioModel:string = 'Middle';
+  public checkModel:any = {left: false, middle: true, right: false};
   users_num:  FirebaseObjectObservable<any>;
   testing:    FirebaseObjectObservable<any>;
   items:      FirebaseListObservable<any>;

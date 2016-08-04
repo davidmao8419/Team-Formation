@@ -7,17 +7,53 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
-  'firebase': 'vendor/firebase/firebase.js',
-  'angularfire2': 'vendor/angularfire2'
+ 'firebase': 'vendor/firebase/firebase.js',
+ 'angularfire2': 'vendor/angularfire2',
+ 'ng2-bootstrap': 'vendor/ng2-bootstrap',
+ '@angular2-material': 'vendor/@angular2-material',
+ 'moment': 'vendor/moment/moment.js'
+
 };
 
 /** User packages configuration. */
 const packages: any = {
-  angularfire2: {
-    defaultExtension: 'js',
-    main: 'angularfire2.js'
-  }
+ angularfire2: {
+   defaultExtension: 'js',
+   main: 'angularfire2.js'
+ },
+ 'ng2-bootstrap': {
+   format: 'cjs',
+   defaultExtension: 'js',
+   main: 'ng2-bootstrap.js'
+ },
+ 'moment':{
+   format: 'cjs'
+ }
+
 };
+const materialPkgs:string[] = [
+ 'core',
+ 'toolbar',
+ 'icon',
+ 'button',
+ 'sidenav',
+ 'list',
+ 'card',
+ 'input',
+ 'checkbox',
+ 'list',
+ 'progress-circle',
+ 'progress-bar',
+ 'radio',
+ 'sidenav',
+ 'toolbar',
+ 'tabs',
+ 'icon'
+];
+
+materialPkgs.forEach((pkg) => {
+ packages[`@angular2-material/${pkg}`] = {main: `${pkg}.js`};
+});
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************************************
