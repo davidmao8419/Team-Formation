@@ -17,7 +17,7 @@ export const AppRoutes: Route[]=[
     { path:'chat/:id', component: ChatComponent},
     { path:'wait/:id', component: WaitComponent},
     { path:'formone/:id', component:FormoneComponent},
-    { path:'formtwo/:id',component:FormtwoComponent},
+    { path:'formtwo/:id', component:FormtwoComponent},
     { path:'success/:surveyCode', component:SuccessComponent}
 ];
 

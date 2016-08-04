@@ -1,8 +1,6 @@
-import { Component, OnInit, OnDestroy, Inject, HostListener } from '@angular/core';
-import { AngularFire, FirebaseListObservable, FirebaseAuth, FirebaseObjectObservable,FirebaseUrl} from 'angularfire2';
-import {ROUTER_DIRECTIVES } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { AngularFire, FirebaseListObservable} from 'angularfire2';
 import { Router,ActivatedRoute} from '@angular/router';
-import { Observable} from 'rxjs/Rx';
 
 @Component({
   moduleId: module.id,
@@ -11,10 +9,11 @@ import { Observable} from 'rxjs/Rx';
   styleUrls: ['formtwo.component.css']
 })
 export class FormtwoComponent implements OnInit {
- formtwoPage:FirebaseListObservable<any>;
+  formtwoPage:FirebaseListObservable<any>;
   public id:string;
   public sub;
   public random_number:number;
+
   constructor(public af: AngularFire, private _router:Router, private _route:ActivatedRoute) {
     this.formtwoPage=af.database.list('/page_formTwo');
   }
@@ -26,13 +25,9 @@ export class FormtwoComponent implements OnInit {
     this.random_number=Math.ceil(Math.random()*1000000);
   }
 
-
   submit(ans:number){
     this.formtwoPage.push({TurkID:this.id,"1+1":ans,"survey code":this.random_number});
-    
     let link=["/success/"+this.random_number];
     this._router.navigate(link);
-    
   }
-
 }

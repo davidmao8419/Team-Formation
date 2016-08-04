@@ -1,15 +1,14 @@
-import { Component, OnInit, OnDestroy, Inject, HostListener } from '@angular/core';
-import { AngularFire, FirebaseListObservable, FirebaseAuth, FirebaseObjectObservable,FirebaseUrl} from 'angularfire2';
-import {ROUTER_DIRECTIVES } from '@angular/router';
+import { Component, OnInit} from '@angular/core';
+import { AngularFire, FirebaseListObservable} from 'angularfire2';
 import { Router,ActivatedRoute} from '@angular/router';
-import { Observable} from 'rxjs/Rx';
 
 @Component({
   moduleId: module.id,
   selector: 'app-formone',
   templateUrl: 'formone.component.html',
-  styleUrls: ['formone.component.css']
+  styleUrls: [ 'formone.component.css']
 })
+
 export class FormoneComponent implements OnInit {
   formonePage:FirebaseListObservable<any>;
   public id:string;
@@ -23,7 +22,6 @@ export class FormoneComponent implements OnInit {
       this.id=params['id'];
     })
   }
-
 
   submit(ans:number){
     this.formonePage.push({TurkID:this.id,"1+1":ans});
