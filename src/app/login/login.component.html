@@ -30,6 +30,11 @@
 
         <br>
         <button (click)="login(account.value)">Join Experiment</button>
+        <button type="button" class="btn btn-primary"
+        [(ngModel)]="singleModel" btnCheckbox
+        btnCheckboxTrue="1" btnCheckboxFalse="0">
+    Single Toggle
+</button>
     </div>
 </div>
 <br>

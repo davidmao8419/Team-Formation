@@ -3,7 +3,7 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable} from 'an
 import { Router } from '@angular/router';
 import { Observable} from 'rxjs/Rx';
 import { DatePipe } from'@angular/common';
-mport {CORE_DIRECTIVES} from '@angular/common';
+import {CORE_DIRECTIVES} from '@angular/common';
 import {FORM_DIRECTIVES} from '@angular/forms';
 import {BUTTON_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import {MD_INPUT_DIRECTIVES} from '@angular2-material/input';

@@ -11,10 +11,13 @@ import { Router,ActivatedRoute} from '@angular/router';
 
 export class FormoneComponent implements OnInit {
   formonePage:FirebaseListObservable<any>;
+  chatroom:FirebaseListObservable<any>;
   public id:string;
   public sub;
+  public roomUsers:number=0;
   constructor(public af: AngularFire, private _router:Router, private _route:ActivatedRoute) {
     this.formonePage=af.database.list('/page_formOne');
+    this.chatroom=af.database.list('/chatRoomAssign');
   }
 
   ngOnInit() {
